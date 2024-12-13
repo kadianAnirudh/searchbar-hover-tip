@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Camera, Search, Grid, Menu, Apple } from 'lucide-react';
+import { Camera, Search, Grid, Menu, Apple, Text, Translate } from 'lucide-react';
+import { Button } from "@/components/ui/button";
 
 interface LocationState {
   imageSource: string;
@@ -46,19 +47,44 @@ const Images = () => {
       <div className="flex h-[calc(100vh-64px)]">
         {/* Left Half - Image Editor */}
         <div className="w-1/2 p-6 border-r border-gray-700">
-          <div className="relative w-full h-full flex items-center justify-center">
+          <div className="relative w-full h-full flex flex-col items-center justify-center gap-4">
+            {/* Find image source button */}
+            <Button 
+              variant="outline" 
+              className="absolute top-0 left-1/2 -translate-x-1/2 bg-[#303134] hover:bg-[#303134]/80 border-none"
+            >
+              <Search className="w-4 h-4 mr-2" />
+              Find image source
+            </Button>
+
             <div className="relative">
               <img
                 src={imageSource}
                 alt="Uploaded"
                 className="max-w-full max-h-[70vh] object-contain"
               />
-              <div className="absolute inset-0 border-2 border-white rounded-lg pointer-events-none">
+              <div className="absolute inset-0 pointer-events-none">
                 <div className="absolute left-0 top-0 w-4 h-4 border-l-4 border-t-4 border-white rounded-tl-lg" />
                 <div className="absolute right-0 top-0 w-4 h-4 border-r-4 border-t-4 border-white rounded-tr-lg" />
                 <div className="absolute left-0 bottom-0 w-4 h-4 border-l-4 border-b-4 border-white rounded-bl-lg" />
                 <div className="absolute right-0 bottom-0 w-4 h-4 border-r-4 border-b-4 border-white rounded-br-lg" />
               </div>
+            </div>
+
+            {/* Action buttons */}
+            <div className="flex gap-2 mt-4">
+              <Button variant="outline" className="bg-[#303134] hover:bg-[#303134]/80 border-none">
+                <Search className="w-4 h-4" />
+                Search
+              </Button>
+              <Button variant="outline" className="bg-[#303134] hover:bg-[#303134]/80 border-none">
+                <Text className="w-4 h-4" />
+                Text
+              </Button>
+              <Button variant="outline" className="bg-[#303134] hover:bg-[#303134]/80 border-none">
+                <Translate className="w-4 h-4" />
+                Translate
+              </Button>
             </div>
           </div>
         </div>
