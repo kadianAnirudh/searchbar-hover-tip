@@ -39,41 +39,53 @@
 }
 
 .ReactCrop__crop-selection {
-  border: none !important;
+  border: 1px solid white !important;
   border-radius: 8px;
 }
 
 .ReactCrop__drag-handle {
-  width: 20px !important;
-  height: 20px !important;
-  border: 4px solid white !important;
+  width: 24px !important;
+  height: 24px !important;
   background: transparent !important;
+  border: none !important;
+  position: relative;
 }
 
-.ReactCrop__drag-handle::after {
+.ReactCrop__drag-handle::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 4px solid white;
+}
+
+.ReactCrop__drag-handle.ord-nw::before {
+  border-right: 0;
+  border-bottom: 0;
+  border-top-left-radius: 8px;
+}
+
+.ReactCrop__drag-handle.ord-ne::before {
+  border-left: 0;
+  border-bottom: 0;
+  border-top-right-radius: 8px;
+}
+
+.ReactCrop__drag-handle.ord-sw::before {
+  border-right: 0;
+  border-top: 0;
+  border-bottom-left-radius: 8px;
+}
+
+.ReactCrop__drag-handle.ord-se::before {
+  border-left: 0;
+  border-top: 0;
+  border-bottom-right-radius: 8px;
+}
+
+.ReactCrop__drag-handle.ord-n,
+.ReactCrop__drag-handle.ord-s,
+.ReactCrop__drag-handle.ord-e,
+.ReactCrop__drag-handle.ord-w {
   display: none !important;
-}
-
-.ReactCrop__drag-handle.ord-nw {
-  border-top-left-radius: 8px !important;
-  margin-top: -3px !important;
-  margin-left: -3px !important;
-}
-
-.ReactCrop__drag-handle.ord-ne {
-  border-top-right-radius: 8px !important;
-  margin-top: -3px !important;
-  margin-right: -3px !important;
-}
-
-.ReactCrop__drag-handle.ord-sw {
-  border-bottom-left-radius: 8px !important;
-  margin-bottom: -3px !important;
-  margin-left: -3px !important;
-}
-
-.ReactCrop__drag-handle.ord-se {
-  border-bottom-right-radius: 8px !important;
-  margin-bottom: -3px !important;
-  margin-right: -3px !important;
 }
