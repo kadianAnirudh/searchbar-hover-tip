@@ -1,12 +1,34 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import React, { useState } from 'react';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import SearchBar from '@/components/SearchBar';
+import ImageSearchModal from '@/components/ImageSearchModal';
+import LanguageOptions from '@/components/LanguageOptions';
 
 const Index = () => {
+  const [isImageModalOpen, setIsImageModalOpen] = useState(false);
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen flex flex-col">
+      <Header />
+      
+      <main className="flex-1 flex flex-col items-center justify-center px-4 -mt-20">
+        <img
+          src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_light_color_272x92dp.png"
+          alt="Google"
+          className="w-[272px] h-[92px] mb-8"
+        />
+        
+        <SearchBar onCameraClick={() => setIsImageModalOpen(true)} />
+        <LanguageOptions />
+        
+        <ImageSearchModal
+          isOpen={isImageModalOpen}
+          onClose={() => setIsImageModalOpen(false)}
+        />
+      </main>
+      
+      <Footer />
     </div>
   );
 };
