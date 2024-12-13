@@ -30,3 +30,50 @@
   background: rgba(0, 0, 0, 0.85);
   backdrop-filter: blur(4px);
 }
+
+/* Custom styles for react-image-crop */
+.ReactCrop {
+  position: relative;
+  max-height: 70vh;
+  cursor: crosshair;
+}
+
+.ReactCrop__crop-selection {
+  border: none !important;
+  border-radius: 8px;
+}
+
+.ReactCrop__drag-handle {
+  width: 20px !important;
+  height: 20px !important;
+  border: 4px solid white !important;
+  background: transparent !important;
+}
+
+.ReactCrop__drag-handle::after {
+  display: none !important;
+}
+
+.ReactCrop__drag-handle.ord-nw {
+  border-top-left-radius: 8px !important;
+  margin-top: -3px !important;
+  margin-left: -3px !important;
+}
+
+.ReactCrop__drag-handle.ord-ne {
+  border-top-right-radius: 8px !important;
+  margin-top: -3px !important;
+  margin-right: -3px !important;
+}
+
+.ReactCrop__drag-handle.ord-sw {
+  border-bottom-left-radius: 8px !important;
+  margin-bottom: -3px !important;
+  margin-left: -3px !important;
+}
+
+.ReactCrop__drag-handle.ord-se {
+  border-bottom-right-radius: 8px !important;
+  margin-bottom: -3px !important;
+  margin-right: -3px !important;
+}

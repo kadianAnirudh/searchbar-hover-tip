@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Camera, Search, Grid, Menu, Apple, Text, Languages } from 'lucide-react';
 import { Button } from "@/components/ui/button";
+import ReactCrop, { type Crop } from 'react-image-crop';
+import 'react-image-crop/dist/ReactCrop.css';
 
 interface LocationState {
   imageSource: string;
@@ -11,7 +13,13 @@ const Images = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [imageSource, setImageSource] = useState<string>('');
-  const [cropBounds, setCropBounds] = useState({ x: 0, y: 0, width: 100, height: 100 });
+  const [crop, setCrop] = useState<Crop>({
+    unit: '%',
+    x: 25,
+    y: 25,
+    width: 50,
+    height: 50
+  });
 
   useEffect(() => {
     const state = location.state as LocationState;
@@ -57,18 +65,18 @@ const Images = () => {
               Find image source
             </Button>
 
-            <div className="relative">
-              <img
-                src={imageSource}
-                alt="Uploaded"
-                className="max-w-full max-h-[70vh] object-contain"
-              />
-              <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute left-0 top-0 w-4 h-4 border-l-4 border-t-4 border-white rounded-tl-lg" />
-                <div className="absolute right-0 top-0 w-4 h-4 border-r-4 border-t-4 border-white rounded-tr-lg" />
-                <div className="absolute left-0 bottom-0 w-4 h-4 border-l-4 border-b-4 border-white rounded-bl-lg" />
-                <div className="absolute right-0 bottom-0 w-4 h-4 border-r-4 border-b-4 border-white rounded-br-lg" />
-              </div>
+            <div className="relative max-w-full max-h-[70vh]">
+              <ReactCrop
+                crop={crop}
+                onChange={(c) => setCrop(c)}
+                className="max-h-[70vh]"
+              >
+                <img
+                  src={imageSource}
+                  alt="Uploaded"
+                  className="max-w-full max-h-[70vh] object-contain"
+                />
+              </ReactCrop>
             </div>
 
             {/* Action buttons */}
