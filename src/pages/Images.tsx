@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Camera, Search, Grid, Menu } from 'lucide-react';
-import { Strawberry } from 'lucide-react';
+import { Camera, Search, Grid, Menu, Apple } from 'lucide-react';
 
 interface LocationState {
   imageSource: string;
@@ -66,7 +65,7 @@ const Images = () => {
 
         {/* Right Half - Loading State */}
         <div className="w-1/2 flex flex-col items-center justify-center">
-          <Strawberry className="w-16 h-16 text-red-500 mb-4" />
+          <Apple className="w-16 h-16 text-red-500 mb-4" />
           <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500 mb-4"></div>
           <p className="text-gray-400">Results are loadin'</p>
         </div>
