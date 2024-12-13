@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Camera, Search, Grid, Menu, Apple, Text, Translate } from 'lucide-react';
+import { Camera, Search, Grid, Menu, Apple, Text, Languages } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 
 interface LocationState {
@@ -82,7 +82,7 @@ const Images = () => {
                 Text
               </Button>
               <Button variant="outline" className="bg-[#303134] hover:bg-[#303134]/80 border-none">
-                <Translate className="w-4 h-4" />
+                <Languages className="w-4 h-4" />
                 Translate
               </Button>
             </div>
