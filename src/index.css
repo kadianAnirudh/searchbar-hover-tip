@@ -36,14 +36,10 @@
   position: relative;
   max-height: 70vh;
   cursor: crosshair;
-  width: 100%;
 }
 
 .ReactCrop__crop-selection {
   border: 1px solid white !important;
-  width: 100% !important;
-  height: 100% !important;
-  inset: 0 !important;
   border-radius: 8px;
 }
 
@@ -64,74 +60,57 @@
 }
 
 .ReactCrop__drag-handle.ord-nw {
-  top: -2px !important;
-  left: -2px !important;
+  top: -8px !important;
+  left: -8px !important;
 }
 
 .ReactCrop__drag-handle.ord-ne {
-  top: -2px !important;
-  right: -2px !important;
+  top: -8px !important;
+  right: -8px !important;
 }
 
 .ReactCrop__drag-handle.ord-sw {
-  bottom: -2px !important;
-  left: -2px !important;
+  bottom: -8px !important;
+  left: -8px !important;
 }
 
 .ReactCrop__drag-handle.ord-se {
-  bottom: -2px !important;
-  right: -2px !important;
+  bottom: -8px !important;
+  right: -8px !important;
 }
 
 .ReactCrop__drag-handle.ord-nw::before {
   border-right: 0;
   border-bottom: 0;
-  border-top-left-radius: 8px;
+  border-top-left-radius: 6px;
 }
 
 .ReactCrop__drag-handle.ord-ne::before {
   border-left: 0;
   border-bottom: 0;
-  border-top-right-radius: 8px;
+  border-top-right-radius: 6px;
 }
 
 .ReactCrop__drag-handle.ord-sw::before {
   border-right: 0;
   border-top: 0;
-  border-bottom-left-radius: 8px;
+  border-bottom-left-radius: 6px;
 }
 
 .ReactCrop__drag-handle.ord-se::before {
   border-left: 0;
   border-top: 0;
-  border-bottom-right-radius: 8px;
+  border-bottom-right-radius: 6px;
 }
 
-/* Hide all lines and middle handles */
+/* Hide middle handles and lines */
 .ReactCrop__drag-handle.ord-n,
 .ReactCrop__drag-handle.ord-s,
 .ReactCrop__drag-handle.ord-e,
-.ReactCrop__drag-handle.ord-w,
-.ReactCrop__drag-bar {
+.ReactCrop__drag-handle.ord-w {
   display: none !important;
 }
 
-.action-button {
-  @apply px-6 py-2 rounded-full transition-colors;
-}
-
-.action-button-group {
-  @apply flex bg-[#303134] rounded-full p-1;
-}
-
-.action-button-group button {
-  @apply px-6 py-2 rounded-full transition-colors;
-}
-
-.action-button-group button.active {
-  @apply bg-white text-[#303134];
-}
-
-.action-button-group button:not(.active) {
-  @apply text-gray-400 hover:text-white;
+.ReactCrop__drag-bar {
+  display: none !important;
 }
