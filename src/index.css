@@ -40,7 +40,7 @@
 
 .ReactCrop__crop-selection {
   border: 1px solid white !important;
-  border-radius: 8px;
+  border-radius: 0 !important;
 }
 
 .ReactCrop__drag-handle {
@@ -92,13 +92,13 @@
 }
 
 .ReactCrop__drag-handle.ord-sw::before {
-  border-right: 0;
+  border-left: 0;
   border-top: 0;
   border-bottom-left-radius: 6px;
 }
 
 .ReactCrop__drag-handle.ord-se::before {
-  border-left: 0;
+  border-right: 0;
   border-top: 0;
   border-bottom-right-radius: 6px;
 }
@@ -107,10 +107,27 @@
 .ReactCrop__drag-handle.ord-n,
 .ReactCrop__drag-handle.ord-s,
 .ReactCrop__drag-handle.ord-e,
-.ReactCrop__drag-handle.ord-w {
+.ReactCrop__drag-handle.ord-w,
+.ReactCrop__drag-bar {
   display: none !important;
 }
 
-.ReactCrop__drag-bar {
-  display: none !important;
+.action-button {
+  @apply px-6 py-2 rounded-full transition-all duration-200;
+}
+
+.action-button.active {
+  @apply bg-white text-[#333333];
+}
+
+.action-button.inactive {
+  @apply bg-[#303134] text-[#888888] hover:bg-[#404144];
+}
+
+.action-buttons-group {
+  @apply flex overflow-hidden rounded-full bg-[#303134];
+}
+
+.action-buttons-group .action-button {
+  @apply rounded-none first:rounded-l-full last:rounded-r-full;
 }
