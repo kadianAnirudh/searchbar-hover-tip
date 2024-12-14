@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Camera, Search, Grid, Menu, Apple, Text, Languages } from 'lucide-react';
-import { Button } from "@/components/ui/button";
+import { Camera, Search, Menu, Grid, Apple } from 'lucide-react';
 import ReactCrop, { type Crop } from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
 
@@ -9,16 +8,19 @@ interface LocationState {
   imageSource: string;
 }
 
+type ActionType = 'search' | 'text' | 'translate';
+
 const Images = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [imageSource, setImageSource] = useState<string>('');
+  const [selectedAction, setSelectedAction] = useState<ActionType>('search');
   const [crop, setCrop] = useState<Crop>({
     unit: '%',
-    x: 25,
-    y: 25,
-    width: 50,
-    height: 50
+    x: 0,
+    y: 0,
+    width: 100,
+    height: 100
   });
 
   useEffect(() => {
@@ -57,15 +59,14 @@ const Images = () => {
         <div className="w-1/2 p-6 border-r border-gray-700">
           <div className="relative w-full h-full flex flex-col items-center justify-center gap-4">
             {/* Find image source button */}
-            <Button 
-              variant="outline" 
-              className="absolute top-0 left-1/2 -translate-x-1/2 bg-[#303134] hover:bg-[#303134]/80 border-none"
+            <button 
+              className="absolute top-0 left-1/2 -translate-x-1/2 bg-[#303134] hover:bg-[#303134]/80 px-6 py-2 rounded-full flex items-center gap-2"
             >
-              <Search className="w-4 h-4 mr-2" />
+              <Search className="w-4 h-4" />
               Find image source
-            </Button>
+            </button>
 
-            <div className="relative max-w-full max-h-[70vh]">
+            <div className="relative max-w-full max-h-[70vh] w-full">
               <ReactCrop
                 crop={crop}
                 onChange={(c) => setCrop(c)}
@@ -80,19 +81,25 @@ const Images = () => {
             </div>
 
             {/* Action buttons */}
-            <div className="flex gap-2 mt-4">
-              <Button variant="outline" className="bg-[#303134] hover:bg-[#303134]/80 border-none">
-                <Search className="w-4 h-4" />
+            <div className="action-button-group">
+              <button
+                className={selectedAction === 'search' ? 'active' : ''}
+                onClick={() => setSelectedAction('search')}
+              >
                 Search
-              </Button>
-              <Button variant="outline" className="bg-[#303134] hover:bg-[#303134]/80 border-none">
-                <Text className="w-4 h-4" />
+              </button>
+              <button
+                className={selectedAction === 'text' ? 'active' : ''}
+                onClick={() => setSelectedAction('text')}
+              >
                 Text
-              </Button>
-              <Button variant="outline" className="bg-[#303134] hover:bg-[#303134]/80 border-none">
-                <Languages className="w-4 h-4" />
+              </button>
+              <button
+                className={selectedAction === 'translate' ? 'active' : ''}
+                onClick={() => setSelectedAction('translate')}
+              >
                 Translate
-              </Button>
+              </button>
             </div>
           </div>
         </div>
