@@ -62,21 +62,25 @@
 .ReactCrop__drag-handle.ord-nw {
   top: -8px !important;
   left: -8px !important;
+  transform: rotate(0deg) !important;
 }
 
 .ReactCrop__drag-handle.ord-ne {
   top: -8px !important;
   right: -8px !important;
+  transform: rotate(90deg) !important;
 }
 
 .ReactCrop__drag-handle.ord-sw {
   bottom: -8px !important;
   left: -8px !important;
+  transform: rotate(-90deg) !important;
 }
 
 .ReactCrop__drag-handle.ord-se {
   bottom: -8px !important;
   right: -8px !important;
+  transform: rotate(180deg) !important;
 }
 
 .ReactCrop__drag-handle.ord-nw::before {
@@ -86,21 +90,21 @@
 }
 
 .ReactCrop__drag-handle.ord-ne::before {
-  border-left: 0;
+  border-right: 0;
   border-bottom: 0;
-  border-top-right-radius: 6px;
+  border-top-left-radius: 6px;
 }
 
 .ReactCrop__drag-handle.ord-sw::before {
-  border-left: 0;
-  border-top: 0;
-  border-bottom-left-radius: 6px;
+  border-right: 0;
+  border-bottom: 0;
+  border-top-left-radius: 6px;
 }
 
 .ReactCrop__drag-handle.ord-se::before {
   border-right: 0;
-  border-top: 0;
-  border-bottom-right-radius: 6px;
+  border-bottom: 0;
+  border-top-left-radius: 6px;
 }
 
 /* Hide middle handles and lines */

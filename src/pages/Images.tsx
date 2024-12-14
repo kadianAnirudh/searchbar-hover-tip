@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Search, Grid, Menu, Apple, Camera } from 'lucide-react';
+import { Search, Grid, Menu, Camera } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import ReactCrop, { type Crop } from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
@@ -34,18 +34,18 @@ const Images = () => {
   return (
     <div className="min-h-screen bg-[#202124] text-white">
       {/* Navbar */}
-      <div className="border-b border-gray-700 bg-white">
+      <div className="bg-white border-b border-gray-200">
         <div className="flex items-center justify-between px-6 py-2">
           <div className="flex items-center gap-6">
-            <Menu className="w-6 h-6 text-gray-400" />
+            <Menu className="w-6 h-6 text-gray-600" />
             <div className="flex items-center gap-2">
-              <Camera className="w-6 h-6 text-blue-400" />
-              <span className="text-lg text-black">Google Lens</span>
+              <Camera className="w-6 h-6 text-blue-500" />
+              <span className="text-lg text-gray-800 font-normal">Google Lens</span>
             </div>
           </div>
           <div className="flex items-center gap-4">
-            <Grid className="w-6 h-6 text-gray-400" />
-            <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center">
+            <Grid className="w-6 h-6 text-gray-600" />
+            <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white">
               A
             </div>
           </div>
@@ -53,7 +53,7 @@ const Images = () => {
       </div>
 
       {/* Main Content */}
-      <div className="flex h-[calc(100vh-64px)]">
+      <div className="flex h-[calc(100vh-56px)]">
         {/* Left Half - Image Editor */}
         <div className="w-1/2 p-6 border-r border-gray-700">
           <div className="relative w-full h-full flex flex-col items-center justify-center gap-4">
@@ -105,10 +105,17 @@ const Images = () => {
         </div>
 
         {/* Right Half - Loading State */}
-        <div className="w-1/2 flex flex-col bg-white">
+        <div className="w-1/2 flex flex-col bg-white text-black">
           <div className="flex-1 flex flex-col items-center justify-center">
-            <Apple className="w-16 h-16 text-red-500 mb-4" />
-            <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-black mb-4"></div>
+            <div className="w-16 h-16 text-red-500 mb-4">
+              <svg viewBox="0 0 1024 1024" className="w-full h-full">
+                <path
+                  fill="currentColor"
+                  d="M544 768v128h-64V768H544zm256-384a288 288 0 1 0-576 0c0 118.144 94.528 272.128 288 456.576C705.472 656.128 800 502.144 800 384zM512 960C277.312 746.688 160 565.312 160 384a352 352 0 0 1 704 0c0 181.312-117.312 362.688-352 576z"
+                />
+              </svg>
+            </div>
+            <div className="animate-spin rounded-full h-8 w-8 border-2 border-black border-t-transparent mb-4"></div>
             <p className="text-black">Results are loadin'</p>
           </div>
           <div className="h-16 border-t border-gray-200"></div>
