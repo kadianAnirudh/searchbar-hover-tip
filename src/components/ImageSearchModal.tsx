@@ -1,8 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Image, X } from 'lucide-react';
+import { Image } from 'lucide-react';
 import { useDropzone } from 'react-dropzone';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 
 interface ImageSearchModalProps {
   isOpen: boolean;
@@ -12,11 +11,8 @@ interface ImageSearchModalProps {
 const ImageSearchModal = ({ isOpen, onClose }: ImageSearchModalProps) => {
   const navigate = useNavigate();
   const [imageUrl, setImageUrl] = useState('');
-  const [isDragging, setIsDragging] = useState(false);
 
   const handleImageUpload = (file: File | string) => {
-    // In a real app, we'd upload the file to a server
-    // For now, we'll just navigate to the images page with the file/URL
     if (typeof file === 'string') {
       navigate('/images', { state: { imageSource: file } });
     } else {
@@ -48,14 +44,16 @@ const ImageSearchModal = ({ isOpen, onClose }: ImageSearchModalProps) => {
     }
   };
 
+  if (!isOpen) return null;
+
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="bg-[#202124] border-gray-700 max-w-xl">
-        <DialogHeader>
-          <DialogTitle className="text-white text-lg font-normal">Search any image with Google Lens</DialogTitle>
-        </DialogHeader>
+    <div className="fixed left-1/2 transform -translate-x-1/2 top-[200px] w-[650px] z-50">
+      <div className="bg-[#303134] rounded-lg overflow-hidden">
+        <div className="text-center py-4">
+          <h2 className="text-white text-lg">Search any image with Google Lens</h2>
+        </div>
         
-        <div className="p-6 space-y-6">
+        <div className="bg-[#202124] p-8 border border-gray-700">
           <div 
             {...getRootProps()} 
             className={`border-2 border-dashed ${isDragActive ? 'border-blue-500' : 'border-gray-600'} 
@@ -71,32 +69,33 @@ const ImageSearchModal = ({ isOpen, onClose }: ImageSearchModalProps) => {
             </div>
           </div>
 
-          <div className="text-center">
-            <div className="inline-flex items-center justify-center">
-              <div className="border-t border-gray-600 w-full"></div>
-              <span className="text-gray-400 px-4">OR</span>
-              <div className="border-t border-gray-600 w-full"></div>
+          <div className="relative my-6">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-gray-600"></div>
+            </div>
+            <div className="relative flex justify-center">
+              <span className="bg-[#202124] px-4 text-sm text-gray-400 uppercase">OR</span>
             </div>
           </div>
 
-          <form onSubmit={handleUrlSubmit} className="space-y-2">
+          <form onSubmit={handleUrlSubmit} className="flex gap-2">
             <input
               type="text"
               placeholder="Paste image link"
               value={imageUrl}
               onChange={(e) => setImageUrl(e.target.value)}
-              className="w-full px-4 py-2 bg-[#202124] border border-gray-600 rounded text-white placeholder-gray-400 focus:outline-none focus:border-blue-500"
+              className="flex-1 px-4 py-2 bg-[#202124] border border-gray-600 rounded-full text-white placeholder-gray-400 focus:outline-none focus:border-blue-500"
             />
             <button
               type="submit"
-              className="w-full px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
+              className="px-6 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-colors"
             >
               Search
             </button>
           </form>
         </div>
-      </DialogContent>
-    </Dialog>
+      </div>
+    </div>
   );
 };
 
