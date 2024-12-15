@@ -19,7 +19,7 @@
 }
 
 .nav-link {
-  @apply text-[#999] hover:text-white transition-colors;
+  @apply text-[#999] hover:text-[#f1f1f1] transition-colors;
 }
 
 .language-link {
