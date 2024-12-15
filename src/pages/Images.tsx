@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Upload, Grid, Menu, Camera } from 'lucide-react';
+import { Upload, Grid, Menu, Camera, Search } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import ReactCrop, { type Crop } from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
