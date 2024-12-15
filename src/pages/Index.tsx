@@ -12,7 +12,7 @@ const Index = () => {
     <div className="min-h-screen flex flex-col">
       <Header />
       
-      <main className="flex-1 flex flex-col items-center justify-center px-4 -mt-20">
+      <main className="flex-1 flex flex-col items-center justify-center -mt-32">
         <img
           src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_light_color_272x92dp.png"
           alt="Google"
