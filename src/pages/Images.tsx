@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Search, Grid, Menu, Camera } from 'lucide-react';
+import { Upload, Grid, Menu, Camera } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import ReactCrop, { type Crop } from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
@@ -35,17 +35,31 @@ const Images = () => {
     <div className="min-h-screen bg-[#202124] text-white">
       {/* Navbar */}
       <div className="bg-white border-b border-gray-200">
-        <div className="flex items-center justify-between px-6 py-2">
+        <div className="flex items-center justify-between px-6 h-16">
           <div className="flex items-center gap-6">
-            <Menu className="w-6 h-6 text-gray-600" />
-            <div className="flex items-center gap-2">
-              <Camera className="w-6 h-6 text-blue-500" />
-              <span className="text-lg text-gray-800 font-normal">Google Lens</span>
-            </div>
+            <Menu className="w-6 h-6 text-gray-600 cursor-pointer" />
+            <img 
+              src="/lovable-uploads/61b6b21c-39e3-4149-9cbc-d4d3137624d9.png"
+              alt="Google"
+              className="h-8"
+            />
           </div>
           <div className="flex items-center gap-4">
-            <Grid className="w-6 h-6 text-gray-600" />
-            <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white">
+            <Button 
+              variant="ghost" 
+              size="icon"
+              className="hover:bg-gray-100"
+            >
+              <Upload className="w-5 h-5 text-gray-600" />
+            </Button>
+            <Button 
+              variant="ghost" 
+              size="icon"
+              className="hover:bg-gray-100"
+            >
+              <Grid className="w-5 h-5 text-gray-600" />
+            </Button>
+            <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white cursor-pointer">
               A
             </div>
           </div>
@@ -53,7 +67,7 @@ const Images = () => {
       </div>
 
       {/* Main Content */}
-      <div className="flex h-[calc(100vh-56px)]">
+      <div className="flex h-[calc(100vh-64px)]">
         {/* Left Half - Image Editor */}
         <div className="w-1/2 p-6 border-r border-gray-700">
           <div className="relative w-full h-full flex flex-col items-center justify-center gap-4">
