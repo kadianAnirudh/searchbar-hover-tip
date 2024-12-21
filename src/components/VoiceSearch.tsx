@@ -10,7 +10,8 @@ interface VoiceSearchProps {
 const VoiceSearch = ({ isOpen, onClose }: VoiceSearchProps) => {
   const [transcript, setTranscript] = useState('');
   const [isListening, setIsListening] = useState(false);
-  const [recognition, setRecognition] = useState<SpeechRecognition | null>(null);
+  const [recognition, setRecognition] = useState<any>(null);
+  const [showInitialState, setShowInitialState] = useState(true);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -25,7 +26,7 @@ const VoiceSearch = ({ isOpen, onClose }: VoiceSearchProps) => {
           setIsListening(true);
         };
 
-        recognition.onresult = (event) => {
+        recognition.onresult = (event: any) => {
           const current = event.resultIndex;
           const transcriptText = event.results[current][0].transcript;
           setTranscript(transcriptText);
@@ -49,10 +50,15 @@ const VoiceSearch = ({ isOpen, onClose }: VoiceSearchProps) => {
   useEffect(() => {
     if (isOpen && recognition) {
       recognition.start();
+      // Show initial state for 1 second
+      setShowInitialState(true);
+      setTimeout(() => {
+        setShowInitialState(false);
+      }, 1000);
     }
   }, [isOpen, recognition]);
 
-  // New useEffect for handling redirection
+  // Redirection useEffect
   useEffect(() => {
     let redirectTimeout: NodeJS.Timeout;
 
@@ -91,41 +97,48 @@ const VoiceSearch = ({ isOpen, onClose }: VoiceSearchProps) => {
             onClick={handleClose}
             className="absolute top-4 right-4 p-2 hover:bg-gray-700 rounded-full"
           >
-            <X className="w-6 h-6 text-gray-300" />
+            <X className="w-8 h-8 text-gray-300" />
           </button>
 
           <div className="w-full max-w-3xl mx-auto px-4">
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col items-center justify-center space-y-12">
               <motion.span
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="text-gray-300 text-xl"
+                className="text-gray-300 text-3xl"
               >
-                {transcript ? transcript : "Listening..."}
+                {transcript ? transcript : showInitialState ? "Speak now" : "Listening..."}
               </motion.span>
 
               <div className="relative">
-                {isListening && (
+                {isListening && !showInitialState && (
                   <motion.div
-                    className="absolute inset-0 bg-white rounded-full"
+                    className="absolute inset-0 rounded-full"
                     initial={{ scale: 1 }}
                     animate={{ 
-                      scale: [1, 1.2, 1],
+                      scale: [1, 1.4, 1],
                     }}
                     transition={{
                       duration: 2,
                       repeat: Infinity,
                       ease: "easeInOut"
                     }}
+                    style={{
+                      backgroundColor: 'white',
+                      width: '160px',
+                      height: '160px',
+                      left: '-20px',
+                      top: '-20px'
+                    }}
                   />
                 )}
                 <motion.div
-                  className={`relative z-10 w-16 h-16 rounded-full flex items-center justify-center ${
-                    isListening ? 'bg-red-500' : 'bg-white'
+                  className={`relative z-10 w-32 h-32 rounded-full flex items-center justify-center ${
+                    showInitialState ? 'bg-white' : 'bg-red-500'
                   }`}
                 >
                   <Mic 
-                    className={`w-8 h-8 ${isListening ? 'text-white' : 'text-red-500'}`} 
+                    className={`w-16 h-16 ${showInitialState ? 'text-red-500' : 'text-white'}`} 
                   />
                 </motion.div>
               </div>
