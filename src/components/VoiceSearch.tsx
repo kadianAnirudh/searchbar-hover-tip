@@ -50,7 +50,6 @@ const VoiceSearch = ({ isOpen, onClose }: VoiceSearchProps) => {
   useEffect(() => {
     if (isOpen && recognition) {
       recognition.start();
-      // Show initial state for 1 second
       setShowInitialState(true);
       setTimeout(() => {
         setShowInitialState(false);
@@ -58,7 +57,6 @@ const VoiceSearch = ({ isOpen, onClose }: VoiceSearchProps) => {
     }
   }, [isOpen, recognition]);
 
-  // Redirection useEffect
   useEffect(() => {
     let redirectTimeout: NodeJS.Timeout;
 
@@ -101,7 +99,7 @@ const VoiceSearch = ({ isOpen, onClose }: VoiceSearchProps) => {
           </button>
 
           <div className="w-full max-w-3xl mx-auto px-4">
-            <div className="flex flex-col items-center justify-center space-y-12">
+            <div className="flex flex-row items-center justify-between space-x-32">
               <motion.span
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -110,10 +108,10 @@ const VoiceSearch = ({ isOpen, onClose }: VoiceSearchProps) => {
                 {transcript ? transcript : showInitialState ? "Speak now" : "Listening..."}
               </motion.span>
 
-              <div className="relative">
+              <div className="relative flex items-center justify-center">
                 {isListening && !showInitialState && (
                   <motion.div
-                    className="absolute inset-0 rounded-full"
+                    className="absolute rounded-full"
                     initial={{ scale: 1 }}
                     animate={{ 
                       scale: [1, 1.4, 1],
@@ -125,10 +123,12 @@ const VoiceSearch = ({ isOpen, onClose }: VoiceSearchProps) => {
                     }}
                     style={{
                       backgroundColor: 'white',
-                      width: '160px',
-                      height: '160px',
-                      left: '-20px',
-                      top: '-20px'
+                      width: '180px',
+                      height: '180px',
+                      transform: 'translate(-50%, -50%)',
+                      left: '50%',
+                      top: '50%',
+                      zIndex: 0
                     }}
                   />
                 )}
