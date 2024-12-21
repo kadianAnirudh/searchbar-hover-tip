@@ -33,10 +33,6 @@ const VoiceSearch = ({ isOpen, onClose }: VoiceSearchProps) => {
 
         recognition.onend = () => {
           setIsListening(false);
-          if (transcript) {
-            window.location.href = `https://www.google.com/search?q=${encodeURIComponent(transcript)}`;
-          }
-          onClose();
         };
 
         setRecognition(recognition);
@@ -56,6 +52,32 @@ const VoiceSearch = ({ isOpen, onClose }: VoiceSearchProps) => {
     }
   }, [isOpen, recognition]);
 
+  // New useEffect for handling redirection
+  useEffect(() => {
+    let redirectTimeout: NodeJS.Timeout;
+
+    if (transcript) {
+      redirectTimeout = setTimeout(() => {
+        window.location.href = `https://www.google.com/search?q=${encodeURIComponent(transcript)}`;
+        onClose();
+      }, 5000);
+    }
+
+    return () => {
+      if (redirectTimeout) {
+        clearTimeout(redirectTimeout);
+      }
+    };
+  }, [transcript, onClose]);
+
+  const handleClose = () => {
+    if (recognition) {
+      recognition.stop();
+    }
+    setTranscript('');
+    onClose();
+  };
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -66,7 +88,7 @@ const VoiceSearch = ({ isOpen, onClose }: VoiceSearchProps) => {
           className="fixed inset-0 bg-[#202124] z-50 flex items-center justify-center"
         >
           <button
-            onClick={onClose}
+            onClick={handleClose}
             className="absolute top-4 right-4 p-2 hover:bg-gray-700 rounded-full"
           >
             <X className="w-6 h-6 text-gray-300" />
