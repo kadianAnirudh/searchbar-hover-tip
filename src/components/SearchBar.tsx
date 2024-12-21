@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Search, ArrowUp } from 'lucide-react';
+import { Search, ArrowUp, Mic } from 'lucide-react';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import VoiceSearch from './VoiceSearch';
 
 interface SearchBarProps {
   onCameraClick: () => void;
@@ -21,6 +22,7 @@ const SearchBar = ({ onCameraClick }: SearchBarProps) => {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const [suggestions, setSuggestions] = useState<string[]>([]);
+  const [isVoiceSearchOpen, setIsVoiceSearchOpen] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -96,23 +98,16 @@ const SearchBar = ({ onCameraClick }: SearchBarProps) => {
                 aria-label="Search"
               />
               <div className="flex items-center gap-1">
-                <button className="p-2 hover:bg-gray-700 rounded-full h-[40px] flex items-center justify-center" onClick={() => {}}>
-                  <svg className="w-6 h-6" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
-                    <g transform="translate(646.3034,236.3789)">
-                      <path className="st6" fill="#1E88E5" d="M-571.3-147.3c7.9,0,14.2-6.4,14.2-14.2l0-33.2c0-7.9-6.4-14.2-14.2-14.2c-7.9,0-14.2,6.4-14.2,14.2v33.2C-585.5-153.7-579.1-147.3-571.3-147.3"/>
-                    </g>
-                    <g transform="translate(645.4803,233.1492)">
-                      <path className="st5" fill="#4CAF50" d="M-575.2-125.5L-575.2-125.5v14.9h9.5v-14.8c-1.5,0.2-3.1,0.2-4.7,0.2C-572.1-125.1-573.6-125.2-575.2-125.5"/>
-                    </g>
-                    <g transform="translate(643.3809,235.9115)">
-                      <path className="st9" fill="#FBC02D" d="M-585.2-144.1c-4.2-4.3-6.9-9.5-6.9-16.6h-9.5c0,9.5,3.7,17.3,9.7,23.3l0.1-0.1c0,0,0,0-0.1-0.1L-585.2-144.1z"/>
-                    </g>
-                    <g transform="translate(650.4081,238.79)">
-                      <path className="st7" fill="#E53935" d="M-551.7-163.6c0,11.9-10.5,23.6-23.7,23.6c-6.6,0-12.5-2.7-16.8-7l-0.1,0.1l-6.6,6.6c0,0,0,0,0.1,0.1c4.9,4.9,11.4,8.2,18.7,9.3c1.6,0.2,3.2,0.4,4.8,0.4c1.6,0,3.2,0,4.7-0.2c16.1-2.3,28.4-16.1,28.4-32.7H-551.7z"/>
-                    </g>
-                  </svg>
+                <button 
+                  className="p-2 hover:bg-gray-700 rounded-full h-[40px] flex items-center justify-center"
+                  onClick={() => setIsVoiceSearchOpen(true)}
+                >
+                  <Mic className="w-6 h-6 text-[#4285f4]" />
                 </button>
-                <button className="p-2 hover:bg-gray-700 rounded-full h-[40px] flex items-center justify-center" onClick={onCameraClick}>
+                <button 
+                  className="p-2 hover:bg-gray-700 rounded-full h-[40px] flex items-center justify-center" 
+                  onClick={onCameraClick}
+                >
                   <svg className="w-6 h-6" viewBox="0 0 150 150" xmlns="http://www.w3.org/2000/svg">
                     <path fill="#FBC02D" d="M94.3,43.6c6.6,0,12.1,5.4,12.1,12.1v9.7h12.1v-9.7c0-13.3-10.8-24.2-24.2-24.2h-9.7v12.1H94.3z"/>
                     <path fill="#E53935" d="M43.6,55.7c0-6.6,5.4-12.1,12.1-12.1h9.7V31.5h-9.7c-13.3,0-24.2,10.8-24.2,24.2v9.7h12.1V55.7z"/>
@@ -184,6 +179,11 @@ const SearchBar = ({ onCameraClick }: SearchBarProps) => {
           </button>
         </div>
       )}
+
+      <VoiceSearch 
+        isOpen={isVoiceSearchOpen}
+        onClose={() => setIsVoiceSearchOpen(false)}
+      />
     </div>
   );
 };
