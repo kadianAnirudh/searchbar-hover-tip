@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mic } from 'lucide-react';
+import { Mic, X } from 'lucide-react';
 
 interface VoiceSearchProps {
   isOpen: boolean;
@@ -65,6 +65,13 @@ const VoiceSearch = ({ isOpen, onClose }: VoiceSearchProps) => {
           exit={{ opacity: 0 }}
           className="fixed inset-0 bg-[#202124] z-50 flex items-center justify-center"
         >
+          <button
+            onClick={onClose}
+            className="absolute top-4 right-4 p-2 hover:bg-gray-700 rounded-full"
+          >
+            <X className="w-6 h-6 text-gray-300" />
+          </button>
+
           <div className="w-full max-w-3xl mx-auto px-4">
             <div className="flex items-center justify-between">
               <motion.span
